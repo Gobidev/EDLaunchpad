@@ -2,7 +2,7 @@ from urllib.request import urlopen
 import json
 import math
 import time
-from Launchpad import *
+import Launchpad
 
 config_filepath = "config.yml"
 
@@ -182,11 +182,11 @@ def run(refresh_time=60):
 
         pixels_active = int(round(distance_left / distance_per_pixel, 0))
 
-        print("pixels_active", pixels_active)
+        print("pixels_active:", pixels_active)
 
-        display(pixels_active)
+        Launchpad.display(pixels_active)
 
-        time.sleep(60)
+        time.sleep(refresh_time)
 
 
 if read_yaml("commander_name") == "key not found in config":

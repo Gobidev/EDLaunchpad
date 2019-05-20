@@ -45,6 +45,3 @@ def display(amount):
         for x in range(8):
             if 8 * y + x < amount:
                 lp.LedCtrlXY(x, y + 1, r, g, b)
-
-
-lp.Close()
