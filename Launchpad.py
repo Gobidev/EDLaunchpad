@@ -1,0 +1,4 @@
+
+
+def display(amount):
+    pass
