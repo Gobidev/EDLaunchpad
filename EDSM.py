@@ -153,7 +153,7 @@ def settings():
     write_to_yaml("end_system", end_system)
 
 
-def run(refresh_time=60):
+def run(refresh_time=60, pixel_amount=64):
 
     commander_name = read_yaml("commander_name")
     start_system = read_yaml("start_system")
@@ -163,25 +163,26 @@ def run(refresh_time=60):
     print("start_system:", start_system)
     print("end_system:", end_sytem)
 
-    start_system_coordinates = get_system_coordinates(start_system)
-    end_sytem_coordinates = get_system_coordinates(end_sytem)
+    try:
+        start_system_coordinates = get_system_coordinates(start_system)
+        end_sytem_coordinates = get_system_coordinates(end_sytem)
+    except:
+        time.sleep(refresh_time)
+        run()
+        return
 
     total_distance = distance(start_system_coordinates, end_sytem_coordinates)
-
     print("total_distance:", total_distance)
 
-    distance_per_pixel = round(total_distance / 64, 2)
-
+    distance_per_pixel = round(total_distance / pixel_amount, 2)
     print("distance_per_pixel:", distance_per_pixel)
 
     while 1:
         distance_left = distance(get_system_coordinates(get_commander_system(commander_name)),
                                  end_sytem_coordinates)
-
         print("distance_left:", distance_left)
 
         pixels_active = int(round(distance_left / distance_per_pixel, 0))
-
         print("pixels_active:", pixels_active)
 
         Launchpad.display(pixels_active)
