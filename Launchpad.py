@@ -37,6 +37,7 @@ def colorgradient(col1, col2, state):
 
 
 def display(amount):
+    lp.LedAllOn(0)
     for y in range(8):
         r, g, b = colorgradient(rgb(102, 0, 0), rgb(102, 102, 0), y + 1)
         r = int(r)
