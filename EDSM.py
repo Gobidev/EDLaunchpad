@@ -190,10 +190,45 @@ def run(refresh_time=60, pixel_amount=64):
         time.sleep(refresh_time)
 
 
-if read_yaml("commander_name") == "key not found in config":
-    settings()
-elif read_yaml("start_system") == "key not found in config":
-    settings()
-elif read_yaml("end_system") == "key not found in config":
-    settings()
-run()
+def refresh(pixel_amount=64):
+
+    commander_name = read_yaml("commander_name")
+    start_system = read_yaml("start_system")
+    end_sytem = read_yaml("end_system")
+
+    print("commander_name:", commander_name)
+    print("start_system:", start_system)
+    print("end_system:", end_sytem)
+
+    start_system_coordinates = get_system_coordinates(start_system)
+    end_sytem_coordinates = get_system_coordinates(end_sytem)
+
+    total_distance = distance(start_system_coordinates, end_sytem_coordinates)
+    print("total_distance:", total_distance)
+
+    distance_per_pixel = round(total_distance / pixel_amount, 2)
+    print("distance_per_pixel:", distance_per_pixel)
+
+    distance_left = distance(get_system_coordinates(get_commander_system(commander_name)),
+                             end_sytem_coordinates)
+    print("distance_left:", distance_left)
+
+    pixels_active = int(round(distance_left / distance_per_pixel, 0))
+    print("pixels_active:", pixels_active)
+
+    Launchpad.display(pixels_active)
+
+
+if int(input("1=60sek refresh, 2=manual refresh\n")) == 1:
+
+    if read_yaml("commander_name") == "key not found in config":
+        settings()
+    elif read_yaml("start_system") == "key not found in config":
+        settings()
+    elif read_yaml("end_system") == "key not found in config":
+        settings()
+    run()
+
+else:
+    # TODO
+    pass
