@@ -8,8 +8,16 @@ except ImportError:
     except ImportError:
         sys.exit("error loading launchpad.py")
 
-
-lp = launchpad.LaunchpadMk2()
+try:
+    lp = launchpad.LaunchpadMk2()
+except:
+    try:
+        lp = launchpad.Launchpad()
+    except:
+        try:
+            lp = launchpad.LaunchpadPro()
+        except:
+            sys.exit("No valid Launchpad detected")
 
 lp.Open()
 lp.ButtonFlush()
@@ -23,26 +31,29 @@ def rgb(r, g, b):
     return r, g, b
 
 
-def colorgradient(col1, col2, state):
+def color_gradient(col1, col2, state):
     r1, g1, b1 = col1
     r2, g2, b2 = col2
 
     step = round((g2 - g1) / 8)
 
-    rnew = 102
-    gnew = round(g1 + state * step)
-    bnew = 0
+    red_new = 102
+    green_new = round(g1 + state * step)
+    blue_new = 0
 
-    return rnew, gnew, bnew
+    return red_new, green_new, blue_new
 
 
 def display(amount):
     lp.LedAllOn(0)
     for y in range(8):
-        r, g, b = colorgradient(rgb(102, 0, 0), rgb(102, 102, 0), y + 1)
+        r, g, b = color_gradient(rgb(102, 0, 0), rgb(102, 102, 0), y + 1)
         r = int(r)
         g = int(g)
         b = int(b)
         for x in range(8):
             if 8 * y + x < amount:
                 lp.LedCtrlXY(x, y + 1, r, g, b)
+
+
+# display(2)
