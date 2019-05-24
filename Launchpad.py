@@ -1,4 +1,5 @@
 import sys
+from EDSM import refresh
 
 try:
     import launchpad_py as launchpad
@@ -22,6 +23,14 @@ except:
 lp.Open()
 lp.ButtonFlush()
 lp.LedAllOn(0)
+
+
+def button_press():
+    while 1:
+        press = lp.ButtonStateXY()
+        if press:
+            if press[0] == 0 and press[1] == 0:
+                refresh()
 
 
 def rgb(r, g, b):

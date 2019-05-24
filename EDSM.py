@@ -2,7 +2,6 @@ from urllib.request import urlopen
 import json
 import math
 import time
-import Launchpad
 
 config_filepath = "config.yml"
 
@@ -185,6 +184,7 @@ def run(refresh_time=60, pixel_amount=64):
         pixels_active = int(round(distance_left / distance_per_pixel, 0))
         print("pixels_active:", pixels_active)
 
+        import Launchpad
         Launchpad.display(pixels_active)
 
         time.sleep(refresh_time)
@@ -216,19 +216,5 @@ def refresh(pixel_amount=64):
     pixels_active = int(round(distance_left / distance_per_pixel, 0))
     print("pixels_active:", pixels_active)
 
+    import Launchpad
     Launchpad.display(pixels_active)
-
-
-if int(input("1=60sek refresh, 2=manual refresh\n")) == 1:
-
-    if read_yaml("commander_name") == "key not found in config":
-        settings()
-    elif read_yaml("start_system") == "key not found in config":
-        settings()
-    elif read_yaml("end_system") == "key not found in config":
-        settings()
-    run()
-
-else:
-    # TODO
-    pass
