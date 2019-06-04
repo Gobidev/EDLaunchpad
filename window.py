@@ -42,10 +42,10 @@ def window(height=100, width=300):
     label = ttk.Label(frame, text="Flown distance:")
     label.grid(row=0, column=0, padx=5, pady=3, sticky="W")
 
-    refresh_button = ttk.Button(frame, text="Refresh", command=lambda: refresh())
+    refresh_button = ttk.Button(frame, text="Refresh", command=refresh)
     refresh_button.grid(row=0, column=1, padx=5, ipadx=20, sticky="E")
 
-    checkbox = ttk.Checkbutton(frame, text="Auto Refresh", state="normal", command=cb_command)
+    checkbox = ttk.Checkbutton(frame, text="Auto Refresh", command=cb_command)
     checkbox.grid(row=2, column=0, padx=5, pady=3, sticky="W")
 
     bar = ttk.Progressbar(frame, mode="determinate", value=0, length=270)
