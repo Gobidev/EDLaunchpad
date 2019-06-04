@@ -15,7 +15,7 @@ def show(amount):
 def window(height=100, width=300):
     global bar, label
     root = tk.Tk()
-    root.title("EDRouteDisplay")
+    root.title("EDLaunchpad")
     root.resizable(False, False)
     ttk.Style().theme_use('vista')
 

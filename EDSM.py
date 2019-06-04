@@ -219,7 +219,11 @@ def refresh(pixel_amount=64):
     progress = 100 - int(round(distance_left / (round(total_distance / 100)), 0))
     print("progress: " + str(progress) + "%")
 
-    import Launchpad
-    Launchpad.display(pixels_active)
     import window
     window.show(progress)
+
+    try:
+        import Launchpad
+        Launchpad.display(pixels_active)
+    except:
+        pass
