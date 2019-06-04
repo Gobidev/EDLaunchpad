@@ -1,5 +1,8 @@
 from EDSM import *
 import Launchpad
+import window
+
+window.window()
 
 if int(input("1=60sek refresh, 2=manual refresh\n")) == 1:
 
