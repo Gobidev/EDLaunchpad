@@ -9,7 +9,7 @@ count = 0
 
 def show(amount):
     bar.config(value=amount)
-    label.config(text="Flown distance: " + str(amount) + "%")
+    label.config(text="Progress: " + str(amount) + "%")
 
 
 def window(height=100, width=300):
@@ -39,7 +39,7 @@ def window(height=100, width=300):
     frame = tk.Frame(root, bd=10)
     frame.place(relheight=1, relwidth=1)
 
-    label = ttk.Label(frame, text="Flown distance:")
+    label = ttk.Label(frame, text="Progress: ")
     label.grid(row=0, column=0, padx=5, pady=3, sticky="W")
 
     refresh_button = ttk.Button(frame, text="Refresh", command=refresh)
@@ -52,3 +52,6 @@ def window(height=100, width=300):
     bar.grid(row=1, column=0, columnspan=2, padx=5, pady=3, sticky="W")
 
     root.mainloop()
+
+if __name__ == "__main__":
+    import main
